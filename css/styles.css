@@ -1,0 +1,424 @@
+/* -----------------
+Tabla de contenidos:
+--------------------
+1. Fuente ................ 11
+2. Variables ............. 17
+3. Estilos generales ..... 32
+-------------------- 
+*/
+
+
+/* ----- Fuente ----- */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+
+/* ----- Variables ----- */
+:root {
+  /* Colores primarios */
+  --very-dark-grayish-blue: hsl(217, 19%, 35%);
+  --desaturated-dark-blue: hsl(214, 17%, 51%);
+  --grayish-blue: hsl(212, 23%, 69%);
+  --light-grayish-blue: hsl(210, 46%, 95%);
+  --white: hsl(0, 0%, 100%);
+
+  /* Tipografia */
+  --font-size: 13px;
+  --font-family: 'Manrope', sans-serif;
+  --font-weight-regular: 500;
+  --font-weight-bold: 700;
+}
+
+
+/* ----------------------------- */
+/* ----- Estilos generales ----- */
+/* ----------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  color: var(--very-dark-grayish-blue);
+  background-color: var(--light-grayish-blue);
+}
+
+.card {
+  display: flex;
+  width: 740px;
+  height: 280px;
+  border-radius: 15px;
+  background-color: var(--white);
+  box-shadow: 0 20px 60px -20px rgba(72, 84, 159, 0.2);
+}
+
+.card .share_mobile,
+.card .share_options_mobile{
+  display: none;
+}
+
+.card .img_container {
+  width: 39%;
+  height: 100%;
+  border-radius: 15px 0 0 15px;
+  overflow: hidden;
+}
+
+.card .img_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+  transition: transform 0.3s ease;
+}
+
+.card .img_container img:hover {
+  transform: scale(1.1);
+}
+
+.card .body_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  width: 61%;
+  height: 100%;
+}
+
+.card .body_card h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+}
+
+.card .body_card p {
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  color: var(--desaturated-dark-blue);
+}
+
+.card .body_card .author {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.card .body_card .author>img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.card .body_card .author .author_info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card .body_card .author .author_info .name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+}
+
+.card .body_card .author .author_info .date {
+  margin: 0;
+  font-size: 14px;
+  color: var(--grayish-blue);
+}
+
+.card .body_card .author .share {
+  position: relative;
+  margin-left: auto;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: var(--light-grayish-blue);
+  transition: background-color 0.3s ease;
+}
+
+.card .body_card .author .share:hover {
+  background-color: var(--desaturated-dark-blue);
+}
+
+.card .body_card .author .share > img {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.card .body_card .author .share:hover > img {
+  filter: contrast(0) brightness(10);
+}
+
+.card .body_card .author .share .share_options {
+  position: absolute;
+  top: -125%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 230px;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: var(--very-dark-grayish-blue);  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card .body_card .author .share .share_options.active {
+  animation: displayShareOptions 0.3s ease forwards;
+}
+
+.card .body_card .author .share .share_options.inactive {
+  animation: displayNoneShareOptions 0.3s ease forwards;
+}
+
+.card .body_card .author .share .share_options::before {
+  content: '';
+  position: absolute;
+  top: 98%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-top-color: var(--very-dark-grayish-blue);
+}
+
+.card .body_card .author .share .share_options span {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--grayish-blue);
+}
+
+.card .body_card .author .share .share_options > img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.card .body_card .author .share .share_options > img:hover {
+  filter: drop-shadow(0 0 5px var(--white));
+}
+
+@keyframes displayShareOptions {
+  0% {
+    top: 0%;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    /* Efecto de sacudida */
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-50%, -50%) rotate(10deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(-10deg);
+  }
+
+  75% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+
+  100% {
+    top: -125%;
+    width: 230px;
+    opacity: 1;
+    overflow: visible;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+@keyframes displayNoneShareOptions {
+  0% {
+    top: -125%;
+    width: 230px;
+    opacity: 1;
+    overflow: visible;
+  }
+
+  100% {
+    top: 0%;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+}
+
+@media (width < 768px) {
+  body {
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+  }
+  .card {
+    position: relative;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    height: auto;
+  }
+
+  .card .img_container {
+    width: 100%;
+    height: 200px;
+  }
+
+  .card .body_card {
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .card .body_card h1 {
+    line-height: 1.4;
+  }
+
+  .card .body_card p {
+    width: 95%;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .card .body_card .author {
+    margin-top: 10px;
+  }
+
+  .card .body_card .author .share {
+    display: none;
+  }
+
+  .card .share_mobile {
+    position: absolute;
+    z-index: 2;
+    bottom: 20px;
+    right: 30px;
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--light-grayish-blue);
+    transition: all 0.3s ease;
+  }
+
+  .card .share_mobile img {
+    width: 15px;
+    height: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card .share_mobile.active {
+    bottom: 10px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--desaturated-dark-blue);
+  }
+
+  .card .share_mobile.active img {
+    width: 20px;
+    height: 20px;
+    filter: contrast(0) brightness(10);
+  }
+
+  .card .share_options_mobile {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    background-color: var(--very-dark-grayish-blue);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card .share_options_mobile span {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--grayish-blue );
+  }
+
+  .card .share_options_mobile > img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  .card .share_options_mobile > img:hover {
+    filter: drop-shadow(0 0 5px var(--white));
+  }
+
+  .card .share_options_mobile.active {
+    animation: displayShareOptionsMobile 0.3s ease forwards;
+  }
+
+  .card .share_options_mobile.inactive {
+    animation: displayNoneShareOptionsMobile 0.3s ease forwards;
+  }
+
+  @keyframes displayShareOptionsMobile {
+    0% {
+      bottom: 0;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+      /* Efecto de sacudida */
+      transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+      transform: translateY(0) rotate(10deg);
+    }
+
+    50% {
+      transform: translateY(0) rotate(-10deg);
+    }
+
+    75% {
+      transform: translateY(0) rotate(5deg);
+    }
+
+    100% {
+      bottom: 0;
+      height: 60px;
+      opacity: 1;
+      overflow: visible;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+}
+
+@media (width < 376px) {
+  .card .body_card h1 {
+    font-size: 18px;
+  }
+
+  .card .body_card p {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .card .body_card .author .author_info .name,
+  .card .body_card .author .author_info .date {
+    font-size: 12px;
+  }
+
+}
