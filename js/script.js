@@ -27,3 +27,20 @@ share_btn_mobile.addEventListener('click', function() {
         share_btn_mobile.classList.add('active');
     }
 });
+
+window.addEventListener('click', function(e) {
+    let share_menu = document.querySelector('.share_options');
+    let share_menu_mobile = document.querySelector('.share_options_mobile');
+
+    if (e.target != share_menu && e.target != share_btn && e.target != share_menu_mobile && e.target != share_btn_mobile) {
+        if (share_menu.classList.contains('active')) {
+            share_menu.classList.remove('active');
+            share_menu.classList.add('inactive');
+        }
+        if (share_menu_mobile.classList.contains('active')) {
+            share_menu_mobile.classList.remove('active');
+            share_menu_mobile.classList.add('inactive');
+            share_btn_mobile.classList.remove('active');
+        }
+    }
+});
